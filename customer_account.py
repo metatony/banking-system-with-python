@@ -69,20 +69,27 @@ class CustomerAccount(Person):
 
     # Method to display the account menu and get user choice
     def account_menu(self):
-        print ("\n Your Transaction Options Are:")
-        print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print ("1) Deposit money")
-        print ("2) Withdraw money")
-        print ("3) Check balance")
-        print ("4) Update customer name")
-        print ("5) Update customer address")
-        print ("6) Show customer details")
-        print ("7) Calculate interest")
-        print ("8) Overdraft limit")
-        print ("9) Back")
-        print (" ")
-        # Getting user input for menu choice
-        option = int(input ("Choose your option: "))
+        while True:
+            print ("\n Your Transaction Options Are:")
+            print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print ("1) Deposit money")
+            print ("2) Withdraw money")
+            print ("3) Check balance")
+            print ("4) Update customer name")
+            print ("5) Update customer address")
+            print ("6) Show customer details")
+            print ("7) Calculate interest")
+            print ("8) Overdraft limit")
+            print ("9) Back")
+            print (" ")
+            
+            # Getting user input for menu choice
+            try:
+                option = int(input("Choose your option: "))
+                break
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")
+            
         return option
     
     # Method to print details of the customer
@@ -104,15 +111,21 @@ class CustomerAccount(Person):
             choice = self.account_menu()
             if choice == 1:
                 #STEP A.4.1
-                amount = float(input("\n Please enter amount to be deposited: ")) 
-                self.deposit(amount)
-                self.print_balance()
+                try:
+                    amount = float(input("\n Please enter amount to be deposited: ")) 
+                    self.deposit(amount)
+                    self.print_balance()
+                except ValueError:
+                    print("\nInvalid input. Please enter a valid numeric value for the amount.")
                 
             elif choice == 2:
                 #ToDo (withdrawal logic)
-                amount = float(input("\n Please enter amount to be withdrawn: "))
-                self.withdraw(amount)
-                self.print_balance()
+                try:
+                    amount = float(input("\n Please enter amount to be withdrawn: "))
+                    self.withdraw(amount)
+                    self.print_balance()
+                except ValueError:
+                    print("\nInvalid input. Please enter a valid numeric value for the amount.")
                 
             elif choice == 3:
                 #STEP A.4.4
@@ -120,9 +133,9 @@ class CustomerAccount(Person):
                 
             elif choice == 4:
                 #STEP A.4.2
-                fname = input("\n Enter new customer first name: ") 
+                fname = input("\n Enter new customer first name: ").capitalize() 
                 self.update_first_name(fname)
-                sname = input("\nEnter new customer last name: ") 
+                sname = input("\nEnter new customer last name: ").capitalize()
                 self.update_last_name(sname)
                 print('Customer name has been updated successfully')
 
@@ -154,6 +167,7 @@ class CustomerAccount(Person):
             elif choice == 9:
                 loop = 0
         print ("\n Exit account operations")
+        
         
         
     def serialize(self):

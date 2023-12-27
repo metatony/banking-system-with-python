@@ -12,19 +12,26 @@ class SavingsAccount(CustomerAccount):
 
     def account_menu(self):
         # Override the account_menu method to include savings-specific options
-        print("\n Your Transaction Options Are:")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("1) Deposit money")
-        print("2) Withdraw money")
-        print("3) Check balance")
-        print("4) Update customer name")
-        print("5) Update customer address")
-        print("6) Show customer details")
-        print("7) Calculate interest")
-        print("8) Back")
-        print(" ")
-        # Getting user input for menu choice
-        option = int(input("Choose your option: "))
+        while True:
+            print("\n Your Transaction Options Are:")
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print("1) Deposit money")
+            print("2) Withdraw money")
+            print("3) Check balance")
+            print("4) Update customer name")
+            print("5) Update customer address")
+            print("6) Show customer details")
+            print("7) Calculate interest")
+            print("8) Back")
+            print(" ")
+            
+            # Getting user input for menu choice
+            try:
+                option = int(input("Choose your option: "))
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")
+            
+            break
         return option
     
     
@@ -41,17 +48,23 @@ class CurrentAccount(CustomerAccount):
 
     def account_menu(self):
         # Override the account_menu method to include current account-specific options
-        print("\n Your Transaction Options Are:")
-        print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print("1) Deposit money")
-        print("2) Withdraw money")
-        print("3) Check balance")
-        print("4) Update customer name")
-        print("5) Update customer address")
-        print("6) Show customer details")
-        print("7) Calculate interest")
-        print("8) Back")
-        print(" ")
-        # Getting user input for menu choice
-        option = int(input("Choose your option: "))
+        while True:
+            print("\n Your Transaction Options Are:")
+            print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print("1) Deposit money")
+            print("2) Withdraw money")
+            print("3) Check balance")
+            print("4) Update customer name")
+            print("5) Update customer address")
+            print("6) Show customer details")
+            print("7) Calculate interest")
+            print("8) Back")
+            print(" ")
+            # Getting user input for menu choice
+            try:
+                option = int(input("Choose your option: "))
+                break
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")
+            
         return option

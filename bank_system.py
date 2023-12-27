@@ -66,15 +66,21 @@ class BankSystem(object):
 
     def main_menu(self):
         #print the options you have
-        print()
-        print()
-        print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print ("Welcome to the Python Bank System")
-        print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-        print ("1) Admin login")
-        print ("2) Quit Python Bank System")
-        print (" ")
-        option = int(input ("Choose your option: "))
+        while True: # added exception handling to prevent system from crashing
+            print()
+            print()
+            print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print ("Welcome to the Python Bank System")
+            print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print ("1) Admin login")
+            print ("2) Quit Python Bank System")
+            print (" ")
+            try:
+                option = int(input("Choose your option: "))
+                break
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")
+            
         return option
 
 
@@ -141,26 +147,35 @@ class BankSystem(object):
         if found_admin != None:
             if found_admin.get_password() == password:
                 msg = "\n Login successful"
-            else:
+            
+            else: # added an else statement to prevent system from crashing or progressing when a wrong password is input
                 msg = "\n Incorrect password"
+                found_admin = None
         return msg, found_admin
 
     def admin_menu(self, admin_obj):
         #print the options you have
-         print (" ")
-         print ("Welcome Admin %s %s : Avilable options are:" %(admin_obj.get_first_name(), admin_obj.get_last_name()))
-         print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-         print ("1) Transfer money")
-         print ("2) Customer account operations & profile settings")
-         print ("3) Delete customer")
-         print ("4) Print all customers detail")
-         print ("5) Update admin information")
-         print ("6) Print all admins detail")
-         print ("7) Generate management report")
-         print ("8) Sign out")
-         print (" ")
-         option = int(input ("Choose your option: "))
-         return option
+        while True:
+            print (" ")
+            print ("Welcome Admin %s %s : Avilable options are:" %(admin_obj.get_first_name(), admin_obj.get_last_name()))
+            print ("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
+            print ("1) Transfer money")
+            print ("2) Customer account operations & profile settings")
+            print ("3) Delete customer")
+            print ("4) Print all customers detail")
+            print ("5) Update admin information")
+            print ("6) Print all admins detail")
+            print ("7) Generate management report")
+            print ("8) Sign out")
+            print (" ")
+            
+            try:
+                option = int(input("Choose your option: "))
+                break
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")
+                
+        return option
      
     # Method to delete customer
     def delete_customer(self, customer_obj):
@@ -176,32 +191,45 @@ class BankSystem(object):
         while loop == 1:
             choice = self.admin_menu(admin_obj)
             if choice == 1:
-                sender_lname = input("\n Please input sender surname: ")
-                amount = float(input("\n Please input the amount to be transferred: "))
-                receiver_lname = input("\n Please input receiver surname: ")
-                receiver_account_no = input("\n Please input receiver account number: ")
-                self.transferMoney(sender_lname, receiver_lname, receiver_account_no, amount)
-                                  
+                try:
+                    sender_lname = input("\n Please input sender surname: ").capitalize()
+                    amount = float(input("\n Please input the amount to be transferred: "))
+                    receiver_lname = input("\n Please input receiver surname: ").capitalize()
+                    receiver_account_no = input("\n Please input receiver account number: ")
+                    self.transferMoney(sender_lname, receiver_lname, receiver_account_no, amount)
+                except ValueError:
+                    print("\nInvalid input. Please enter a valid numeric value for the amount.")
+
+                                    
             elif choice == 2:
                 #STEP A.4
-                customer_name = input("\n Please input customer surname :\n")
+                customer_name = input("\n Please input customer surname :\n").capitalize() # added the capitalize object to prevent case sensitive error
                 customer_account = self.search_customers_by_name(customer_name)
                 if customer_account != None:
-                    customer_account[0].run_account_options() ######
+                    customer_account[0].run_account_options() 
             
             elif choice == 3:
                 #Todo (logic to delete customer)
-                customer_name = input("\n Please input customer surname to delete:\n")
-                customer_account = self.search_customers_by_name(customer_name)
-                if customer_account:
-                    self.delete_customer(customer_account[0])
-            
+                try:
+                    customer_name = input("\n Please input customer surname to delete:\n").capitalize()
+                    customer_account = self.search_customers_by_name(customer_name)
+                    if customer_account:
+                        self.delete_customer(customer_account[0])
+                        self.save_bank_data_to_file()
+
+                    else:
+                        print("\nNo customer found with the provided surname. Deletion aborted.")
+                except ValueError:
+                    print("\nInvalid input. Please enter a valid customer surname.")
+
+                
             elif choice == 4:
                 #Todo (print all customers details)
                 self.print_all_accounts_details()
                 
             elif choice == 5:  # Option to update admin's own information
                 admin_obj.update_own_info()
+                self.save_bank_data_to_file()
                 
             elif choice == 6:  # Option to update admin's own information
                 self.print_all_admin_details()
@@ -211,6 +239,7 @@ class BankSystem(object):
             
             elif choice == 8:
                 loop = 0
+                self.save_bank_data_to_file()
         print ("\n Exit account operations")
 
     #method to print all customer account details

@@ -40,21 +40,26 @@ class Admin(Person):
     
     
     def update_own_info(self):
-        print(" ")
-        print("Update Admin Information:")
-        print(" ")
-        print("1) Update Admin name")
-        print("2) Update address")
-        print("3) Print Admin info")
-        print("4) Back")
-
-        option = int(input("Choose an option: "))
-        
+        while True:
+            print(" ")
+            print("Update Admin Information:")
+            print(" ")
+            print("1) Update Admin name")
+            print("2) Update address")
+            print("3) Print Admin info")
+            print("4) Back")
+            
+            try:
+                option = int(input("Choose an option: "))
+                break
+            except ValueError:
+                print("\nInvalid input. Please enter a valid integer.")                        
+            
         
         if option == 1:
-            fname = input("\n Enter new admin first name: ") 
+            fname = input("\n Enter new admin first name: ").capitalize()
             self.update_first_name(fname)
-            sname = input("\n Enter new admin last name: ") 
+            sname = input("\n Enter new admin last name: ").capitalize()
             self.update_last_name(sname)
             print('Admin name has been updated successfully')
 
@@ -69,6 +74,9 @@ class Admin(Person):
             print("\n Going back to admin menu.")
         else:
             print("\n Invalid option. Please try again.")
+            
+        return option
+
             
     # Method to print details of the admins
     def print_admin_details(self):
