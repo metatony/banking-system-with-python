@@ -3,10 +3,10 @@ from customer_account import CustomerAccount
 class SavingsAccount(CustomerAccount):
     def __init__(self, fname, lname, address, account_no, balance, interest_rate):
         CustomerAccount.__init__(self, fname, lname, address, account_no, balance)
-        self.interest_rate = interest_rate
+        # self.interest_rate = interest_rate
 
     def calculate_interest(self):
-        interest = self.get_balance() * (self.interest_rate / 100)
+        interest = self.get_balance() * (self.get_interest_rate() / 100)
         self.deposit(interest)
         print(f"\nInterest of {interest:.2f} added to the account.")
 
@@ -31,10 +31,10 @@ class SavingsAccount(CustomerAccount):
 class CurrentAccount(CustomerAccount):
     def __init__(self, fname, lname, address, account_no, balance, overdraft_limit):
         CustomerAccount.__init__(self, fname, lname, address, account_no, balance)
-        self.overdraft_limit = overdraft_limit
+        # self.overdraft_limit = overdraft_limit
 
     def withdraw(self, amount):
-        if self.get_balance() - amount >= -self.overdraft_limit:
+        if self.get_balance() - amount >= -self.get_overdraft_limit:
             super().withdraw(amount)
         else:
             print("\nTransaction failed. Overdraft limit exceeded.")

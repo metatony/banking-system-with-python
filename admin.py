@@ -72,23 +72,23 @@ class Admin(Person):
             
     # Method to print details of the admins
     def print_admin_details(self):
-        print("First name: %s" %self.fname) 
-        print("Last name: %s" %self.lname) 
-        print("Address: %s" %self.address[0]) 
-        print(" %s" %self.address[1]) 
-        print(" %s" %self.address[2]) 
-        print(" %s" %self.address[3]) 
+        print("First name: %s" %self.get_first_name()) 
+        print("Last name: %s" %self.get_last_name()) 
+        print("Address: %s" %self.get_address()[0]) 
+        print(" %s" %self.get_address()[1]) 
+        print(" %s" %self.get_address()[2]) 
+        print(" %s" %self.get_address()[3]) 
         print(" ")
 
 
     def serialize(self):
         return {
-            "fname": self.fname,
-            "lname": self.lname,
-            "address": self.address,
-            "user_name": self.user_name,
-            "password": self.password,
-            "full_admin_rights": self.full_admin_rights
+            "fname": self.get_first_name(),
+            "lname": self.get_last_name(),
+            "address": self.get_address(),
+            "user_name": self.get_username(),
+            "password": self.get_password(),
+            "full_admin_rights": self.has_full_admin_right()
         }
 
     @classmethod

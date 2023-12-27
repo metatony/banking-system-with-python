@@ -1,8 +1,6 @@
 from customer_account import CustomerAccount
 from admin import Admin
 import json
-# from account_type import SavingsAccount
-# from account_type import CurrentAccount
 
 accounts_list = []
 admins_list = []

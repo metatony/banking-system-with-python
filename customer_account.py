@@ -40,18 +40,24 @@ class CustomerAccount(Person):
     def get_balance(self):
         return self.balance
     
+    def get_interest_rate(self):
+        return self.interest_rate
+    
+    def get_overdraft_limit(self):
+        return self.overdraft_limit
+    
+    def get_account_type(self):
+        return self.account_type
+    
     # Method to get the account number
     def get_account_no(self):
         return self.account_no
     
     # method to calculate interest rate for savings accounts
     def calculate_interest(self):
-        # interest = self.get_balance() * (self.interest_rate / 100)
-        # # self.deposit(interest)
-        # print(f"\nInterest of {interest:.2f} added to the account.")
-        
-        if self.interest_rate > 0:
-            interest = self.get_balance() * (self.interest_rate / 100)
+
+        if self.get_interest_rate() > 0:
+            interest = self.get_balance() * (self.get_interest_rate() / 100)
             print(f"\nInterest of {interest:.2f} calculated for the account.")
             return interest
         else:
@@ -82,13 +88,13 @@ class CustomerAccount(Person):
     # Method to print details of the customer
     def print_details(self):
         #STEP A.4.3
-        print("First name: %s" %self.fname) 
-        print("Last name: %s" %self.lname) 
-        print("Account No: %s" %self.account_no) 
-        print("Address: %s" %self.address[0]) 
-        print(" %s" %self.address[1]) 
-        print(" %s" %self.address[2]) 
-        print(" %s" %self.address[3]) 
+        print("First name: %s" %self.get_first_name()) 
+        print("Last name: %s" %self.get_last_name()) 
+        print("Account No: %s" %self.get_account_no()) 
+        print("Address: %s" %self.get_address()[0]) 
+        print(" %s" %self.get_address()[1]) 
+        print(" %s" %self.get_address()[2]) 
+        print(" %s" %self.get_address()[3]) 
         print(" ")
    
     # Method to run various account options based on user input
@@ -133,14 +139,14 @@ class CustomerAccount(Person):
                 
             elif choice == 7:
                 # self.calculate_interest()
-                if self.interest_rate >= 0:
+                if self.get_interest_rate() >= 0:
                     self.calculate_interest()
                 else:
                     print("\nYou are a Current account user. you don't have interest rate")
                 
                 
             elif choice == 8:
-                if self.overdraft_limit <= 0:
+                if self.get_overdraft_limit() <= 0:
                     print('You\'re not eligible for an overdraft')
                 else:
                     print("\nYour overdraft limit is 1000")
@@ -152,14 +158,14 @@ class CustomerAccount(Person):
         
     def serialize(self):
         return {
-            "fname": self.fname,
-            "lname": self.lname,
-            "address": self.address,
-            "account_no": self.account_no,
-            "balance": self.balance,
-            "account_type": self.account_type,
-            "interest_rate": self.interest_rate,
-            "overdraft_limit": self.overdraft_limit
+            "fname": self.get_first_name(),
+            "lname": self.get_last_name(),
+            "address": self.get_address(),
+            "account_no": self.get_account_no(),
+            "balance": self.get_balance(),
+            "account_type": self.get_account_type(),
+            "interest_rate": self.get_interest_rate(),
+            "overdraft_limit": self.get_overdraft_limit()
         }
 
     @classmethod
