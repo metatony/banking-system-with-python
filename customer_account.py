@@ -24,6 +24,7 @@ class CustomerAccount(Person):
         #ToDo
         # self.balance -= amount
         
+        
         # method to calculate overdraft limit
         if self.get_balance() - amount >= -self.overdraft_limit:
             # super().withdraw(amount)
@@ -66,7 +67,6 @@ class CustomerAccount(Person):
         
         
     
-
     # Method to display the account menu and get user choice
     def account_menu(self):
         while True:
@@ -142,11 +142,19 @@ class CustomerAccount(Person):
 
             elif choice == 5:
                 #ToDo (update customer address)
-                addr = input("\n Enter new customer address: ")
-                self.update_address(addr)
-                print("\n Customer address updated successfully!")
+                
+                # addr = input("\n Enter new customer address: ")
+                # self.update_address(addr)
+                # print("\n Customer address updated successfully!")
                 #pass
                 
+                house_no = input("\nPlease enter your house number: ")
+                street = input("\nPlease enter your street name: ").capitalize()
+                city = input("\nPlease enter your city name: ").capitalize()
+                post_code = input("\nPlease enter your post code: ").capitalize()
+                
+                self.update_address(house_no, street, city, post_code)
+                      
             elif choice == 6:
                 self.print_details()
                 

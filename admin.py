@@ -64,9 +64,15 @@ class Admin(Person):
             print('Admin name has been updated successfully')
 
         elif option == 2:
-            new_address = input("\n Enter new address: ")
-            self.update_address(new_address)
-            print("\n Address updated successfully!")
+            # new_address = input("\n Enter new address: ")
+            # self.update_address(new_address)
+            house_no = input("\nPlease enter your house number: ")
+            street = input("\nPlease enter your street name: ").capitalize()
+            city = input("\nPlease enter your city name: ").capitalize()
+            post_code = input("\nPlease enter your post code: ").capitalize()
+            
+            self.update_address(house_no, street, city, post_code)
+                
         elif option == 3:
             print("\n Admin information")
             self.print_admin_details()
