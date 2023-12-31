@@ -24,8 +24,8 @@ class Person:
         return self.lname
         
     # Method to update the address
-    def update_address(self, addr):
-        self.address = addr
+    def update_address(self, addr1, addr2, addr3, addr4):
+        self.address = [addr1, addr2, addr3, addr4]
         print("Address updated successfully!")
     
     # Method to get the address
