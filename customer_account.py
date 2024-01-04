@@ -22,9 +22,7 @@ class CustomerAccount(Person):
     # Method to withdraw money out of the account
     def withdraw(self, amount):
         #ToDo
-        # self.balance -= amount
-        
-        
+                
         # method to calculate overdraft limit
         if self.get_balance() - amount >= -self.overdraft_limit:
             # super().withdraw(amount)
@@ -59,12 +57,9 @@ class CustomerAccount(Person):
 
         if self.get_interest_rate() > 0:
             interest = self.get_balance() * (self.get_interest_rate() / 100)
-            print(f"\nInterest of {interest:.2f} calculated for the account.")
             return interest
         else:
-            print("\nYou are a Current account user. You don't have an interest rate.")
             return 0
-        
         
     
     # Method to display the account menu and get user choice
@@ -142,12 +137,7 @@ class CustomerAccount(Person):
 
             elif choice == 5:
                 #ToDo (update customer address)
-                
-                # addr = input("\n Enter new customer address: ")
-                # self.update_address(addr)
-                # print("\n Customer address updated successfully!")
-                #pass
-                
+                                
                 house_no = input("\nPlease enter your house number: ")
                 street = input("\nPlease enter your street name: ").capitalize()
                 city = input("\nPlease enter your city name: ").capitalize()
@@ -161,7 +151,10 @@ class CustomerAccount(Person):
             elif choice == 7:
                 # self.calculate_interest()
                 if self.get_interest_rate() >= 0:
-                    self.calculate_interest()
+                    if self.get_interest_rate() > 0:
+                        interest = self.get_balance() * (self.get_interest_rate() / 100)
+                        print(f"\nInterest of {interest:.2f} calculated for the account.")
+                        return interest
                 else:
                     print("\nYou are a Current account user. you don't have interest rate")
                 

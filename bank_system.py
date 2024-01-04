@@ -9,8 +9,9 @@ class BankSystem(object):
     def __init__(self):
         self.accounts_list = []
         self.admins_list = []
-        self.load_bank_data_from_file()
-    
+        self.load_bank_data()
+        
+ 
     def load_bank_data(self):
         
         # create customers
@@ -309,8 +310,7 @@ class BankSystem(object):
         print(f"b) Sum of all money the customers currently have in their bank account: {total_money:.2f}")
         print(f"c) Sum of interest rate payable to all accounts for one year: {total_interest:.2f}")
         print(f"d) Total amount of overdrafts currently taken by all customers: {total_overdrafts:.2f}")
-
-
+        
 
 
 app = BankSystem()
