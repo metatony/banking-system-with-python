@@ -10,6 +10,8 @@ class BankSystem(object):
         self.accounts_list = []
         self.admins_list = []
         self.load_bank_data()
+        self.load_bank_data_from_file()
+
         
  
     def load_bank_data(self):

@@ -7,7 +7,6 @@ class SavingsAccount(CustomerAccount):
 
     def calculate_interest(self):
         interest = self.get_balance() * (self.get_interest_rate() / 100)
-        self.deposit(interest)
         print(f"\nInterest of {interest:.2f} added to the account.")
 
     def account_menu(self):

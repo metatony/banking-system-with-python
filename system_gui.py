@@ -227,4 +227,4 @@ class AdminDetails:
          
         
 bank_system_obj = BankSystem()
-AdminLogin()
+# AdminLogin()

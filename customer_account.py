@@ -149,9 +149,7 @@ class CustomerAccount(Person):
                 self.print_details()
                 
             elif choice == 7:
-                # self.calculate_interest()
-                if self.get_interest_rate() >= 0:
-                    if self.get_interest_rate() > 0:
+                if self.get_interest_rate() > 0:
                         interest = self.get_balance() * (self.get_interest_rate() / 100)
                         print(f"\nInterest of {interest:.2f} calculated for the account.")
                         return interest
